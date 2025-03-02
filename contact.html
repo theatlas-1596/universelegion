@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universe Legion - Esport Brawl Stars</title>
+    <style>
+        /* Style général */
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            color: #fff;
+            text-align: center;
+            background: url('fondvague.png') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: space-between;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Animation fade-in pour le body */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 60px 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            position: relative;
+            z-index: 2;
+            animation: slideInDown 1s ease-out;
+        }
+
+        /* Animation du header */
+        @keyframes slideInDown {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            color: #00ff99;
+            letter-spacing: 5px;
+            animation: bounceIn 1.2s ease-out;
+        }
+
+        header p {
+            font-size: 1.6rem;
+            color: #bbb;
+            animation: fadeIn 2s ease-out;
+        }
+
+        /* Animation de bounce pour le titre */
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Navigation */
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            animation: slideInUp 2s ease-in-out;
+        }
+
+        nav li {
+            margin: 0 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #00ff99;
+            font-weight: bold;
+            font-size: 1.3rem;
+            padding: 20px 25px;
+            position: relative;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        nav a:hover {
+            color: #f39c12;
+            transform: scale(1.1);
+            letter-spacing: 2px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: #f39c12;
+            left: 50%;
+            bottom: 0;
+            transition: width 0.3s ease, left 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* Animation de la navigation */
+        @keyframes slideInUp {
+            0% {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Section Contact - Futuriste */
+        #contact {
+            padding: 80px 20px;
+            background: linear-gradient(45deg, rgba(0, 255, 153, 0.7), rgba(255, 0, 255, 0.7));
+            margin: 20px;
+            border-radius: 20px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+            animation: fadeInSection 2s ease-in-out;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        #contact:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        #contact h2 {
+            font-size: 3rem;
+            color: #fff;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            letter-spacing: 3px;
+            animation: slideInUp 1.5s ease-out;
+        }
+
+        #contact p {
+            font-size: 1.3rem;
+            color: #f1f1f1;
+            margin-bottom: 20px;
+        }
+
+        .contact-link {
+            display: inline-block;
+            background: #00ff99;
+            color: #000;
+            padding: 18px 40px;
+            font-size: 1.4rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 255, 153, 0.7);
+            animation: linkAppear 1.5s ease-out;
+        }
+
+        .contact-link:hover {
+            background: #f39c12;
+            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .contact-link::before {
+            content: '';
+            position: absolute;
+            width: 300%;
+            height: 300%;
+            background: #fff;
+            transition: all 0.3s ease;
+            transform: translateX(-50%) translateY(-50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 50%;
+        }
+
+        .contact-link:hover::before {
+            width: 0;
+            height: 0;
+        }
+
+        /* Animation pour la section */
+        @keyframes fadeInSection {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animation du lien */
+        @keyframes linkAppear {
+            0% {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px 20px;
+            text-align: center;
+            color: #bbb;
+            box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 2;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        footer p {
+            font-size: 1rem;
+        }
+
+        /* Animation du footer */
+        @keyframes fadeInFooter {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2.8rem;
+            }
+
+            section h2 {
+                font-size: 2.4rem;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav li {
+                margin: 10px 0;
+            }
+
+            button {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Universe Legion</h1>
+        <p>Team Esport - Brawl Stars</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="equipe.html">Équipe</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <h2>Bienvenue chez Universe Legion</h2>
+        <p>Nous sommes une équipe esport compétitive sur Brawl Stars.</p>
+    </section>
+
+    <section id="contact">
+        <h2>Nous Rejoindre</h2>
+        <p>Envie de rejoindre l'équipe ? Cliquez ci-dessous pour nous contacter !</p>
+        <a href="contact.html" class="contact-link">Contactez-nous ici</a>
+    </section>
+
+    <footer>
+        <p>© 2025 Universe Legion - Tous droits réservés.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
