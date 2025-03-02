@@ -1,201 +1,38 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Réseau Social Éphémère</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f0f2f5;
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .header {
-            background-color: #fff;
-            padding: 10px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .friend-list, .chat-box {
-            background-color: #fff;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .messages {
-            height: 300px;
-            overflow-y: auto;
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .message {
-            padding: 8px;
-            margin: 5px 0;
-            border-radius: 4px;
-            background-color: #e9ecef;
-        }
-
-        .my-message {
-            background-color: #007bff;
-            color: white;
-            margin-left: 20%;
-        }
-
-        input, button {
-            padding: 8px;
-            margin: 5px 0;
-            border-radius: 4px;
-            border: 1px solid #ddd;
-        }
-
-        button {
-            background-color: #007bff;
-            color: white;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil - Club Brawl Stars</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <input type="text" id="username" placeholder="Choisissez un pseudo">
-            <button onclick="setUsername()">Confirmer</button>
-            <button onclick="disconnect()">Déconnexion</button>
-            <span id="currentUser"></span>
-        </div>
-
-        <div class="friend-list">
-            <h3>Ajouter un ami</h3>
-            <input type="text" id="friendName" placeholder="Pseudo de l'ami">
-            <button onclick="addFriend()">Ajouter</button>
-            <h4>Mes amis:</h4>
-            <ul id="friendsList"></ul>
-        </div>
-
-        <div class="chat-box">
-            <h3>Chat</h3>
-            <div id="currentChat"></div>
-            <div class="messages" id="messages"></div>
-            <input type="text" id="messageInput" placeholder="Écrivez un message">
-            <button onclick="sendMessage()">Envoyer</button>
-        </div>
+  <header>
+    <div class="logo-container">
+      <img src="logoteam.png" alt="Logo Team" class="logo">
     </div>
-
-    <script>
-        let currentUser = null;
-        let friends = [];
-        let messages = [];
-        let selectedFriend = null;
-
-        function setUsername() {
-            const usernameInput = document.getElementById('username').value.trim();
-            if (usernameInput) {
-                currentUser = usernameInput;
-                document.getElementById('currentUser').textContent = `Connecté en tant que: ${currentUser}`;
-                document.getElementById('username').disabled = true;
-            }
-        }
-
-        function addFriend() {
-            const friendName = document.getElementById('friendName').value.trim();
-            if (friendName && friendName !== currentUser && !friends.includes(friendName)) {
-                friends.push(friendName);
-                updateFriendList();
-                document.getElementById('friendName').value = '';
-            }
-        }
-
-        function updateFriendList() {
-            const friendsList = document.getElementById('friendsList');
-            friendsList.innerHTML = '';
-            friends.forEach(friend => {
-                const li = document.createElement('li');
-                li.textContent = friend;
-                li.style.cursor = 'pointer';
-                li.onclick = () => selectFriend(friend);
-                friendsList.appendChild(li);
-            });
-        }
-
-        function selectFriend(friend) {
-            selectedFriend = friend;
-            document.getElementById('currentChat').textContent = `Chat avec: ${selectedFriend}`;
-            updateMessages();
-        }
-
-        function sendMessage() {
-            const messageInput = document.getElementById('messageInput');
-            const content = messageInput.value.trim();
-            if (content && currentUser && selectedFriend) {
-                messages.push({
-                    sender: currentUser,
-                    receiver: selectedFriend,
-                    content: content,
-                    timestamp: new Date()
-                });
-                messageInput.value = '';
-                updateMessages();
-            }
-        }
-
-        function updateMessages() {
-            const messagesDiv = document.getElementById('messages');
-            messagesDiv.innerHTML = '';
-            messages
-                .filter(msg => 
-                    (msg.sender === currentUser && msg.receiver === selectedFriend) ||
-                    (msg.sender === selectedFriend && msg.receiver === currentUser)
-                )
-                .forEach(msg => {
-                    const div = document.createElement('div');
-                    div.className = 'message';
-                    if (msg.sender === currentUser) {
-                        div.className += ' my-message';
-                    }
-                    div.textContent = `${msg.sender}: ${msg.content}`;
-                    messagesDiv.appendChild(div);
-                });
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
-
-        function disconnect() {
-            if (confirm('Déconnexion ? Tous les messages seront supprimés.')) {
-                currentUser = null;
-                friends = [];
-                messages = [];
-                selectedFriend = null;
-                document.getElementById('currentUser').textContent = '';
-                document.getElementById('username').disabled = false;
-                document.getElementById('username').value = '';
-                document.getElementById('friendsList').innerHTML = '';
-                document.getElementById('messages').innerHTML = '';
-                document.getElementById('currentChat').textContent = '';
-            }
-        }
-
-        // Empêcher l'envoi du message avec Enter si pas de destinataire
-        document.getElementById('messageInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && selectedFriend) {
-                sendMessage();
-            }
-        });
-    </script>
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Accueil</a></li>
+        <li><a href="boutique.html">Boutique</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="equipe.html">Équipe</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Bienvenue dans l'univers Brawl Stars</h1>
+        <p>Notre club vise la pro-attitude avec passion et innovation.</p>
+        <a href="boutique.html" class="btn">Découvrir la Boutique</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 Universe Legion. Tous droits réservés.</p>
+  </footer>
 </body>
 </html>
+
